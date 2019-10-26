@@ -21,7 +21,7 @@ app.group('/api/v2', (router)=>{
 
     // router.get('/users', UserController.allUser)
 
-    // // Webtoon
+    // // Room
     router.get('/rooms', RoomController.index)
     router.post('/user/:user_id/room', authenticated, RoomController.createRoom)
     // router.get('/webtoons/:title', WebtoonController.showTitle)
