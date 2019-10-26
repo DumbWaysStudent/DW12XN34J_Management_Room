@@ -24,7 +24,6 @@ app.group('/api/v2', (router)=>{
     // // Room
     router.get('/rooms', RoomController.index)
     router.post('/user/:user_id/room', authenticated, RoomController.createRoom)
-    // router.get('/user/:user_id/webtoons', authenticated, WebtoonController.showMyWebtoon)
     // router.post('/user/:user_id/webtoon', authenticated, WebtoonController.createToon)
     // router.put('/user/:user_id/webtoon/:webtoon_id', authenticated, WebtoonController.updateToon)
     // router.delete('/user/:user_id/webtoon/:webtoon_id', authenticated, WebtoonController.deleteToon)
