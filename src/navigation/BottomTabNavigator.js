@@ -49,7 +49,7 @@ const BottomTabNavigator = createMaterialBottomTabNavigator({
 },
 
 {    
-    initialRouteName: 'Checkin',
+    initialRouteName: 'Room',
     tabBarOptions:{
         activeTintColor:'#fff',
         // inactiveTintColor:'red',

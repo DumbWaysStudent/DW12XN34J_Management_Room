@@ -4,7 +4,8 @@ import { createNavigationReducer } from 'react-navigation-redux-helpers'
 import SwitchNav from '../../navigation/SwitchNav'
 import reducerLogin from './../reducers/reducerLogin'
 import reducerRegister from './../reducers/reducerRegister'
-import reducerRoom from './../reducers/reducerRoom'
+import reducerRooms from './../reducers/reducerRooms'
+import reducerCheckin from './../reducers/reducerCheckin'
 
 
 const reduceRouter = createNavigationReducer(SwitchNav)
@@ -13,7 +14,8 @@ const appReducer = combineReducers({
     router: reduceRouter,
     login: reducerLogin,
     register: reducerRegister,
-    room: reducerRoom
+    room: reducerRooms,
+    checkin: reducerCheckin
 })
 
 export default appReducer

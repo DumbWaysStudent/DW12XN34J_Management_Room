@@ -3,7 +3,10 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, AsyncStorag
 import { Icon, Button } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
-import * as actionLogin from '../redux/actions/actionLogin';
+import * as actionLogin from './../redux/actions/actionLogin';
+import Axios from 'axios';
+import {API} from '../host'
+
 
 
 class Login extends Component {
@@ -55,26 +58,59 @@ class Login extends Component {
         this.setState({submitDisabled: true})
     }
   }
-  componentDidMount(){
-    AsyncStorage.clear()
+  // login= async() =>{
+  //   const email = String(this.state.email).toLowerCase()
+  //   const password = String(this.state.password)
+  //   await this.props.handleLogin(email,password)
+  //   const users = this.props.loginLocal.login
+  //     if(users.token){
+  //       await AsyncStorage.multiSet([
+  //         ['token', users.token],
+  //         ['id', `${users.id}`]
+  //       ])
+  //       console.log(users.token)
+  //       console.log(users.id)
+  //       this.props.navigation.navigate('Loading')
+  //     }else{
+  //       alert('Invalid Email or Password')
+  //     }       
+  //   }
+    login =()=>{
+      const {email, password} = this.state
+      
+        Axios({
+            method: 'post',
+            url: `${API}/login`,
+            data: {
+                email: email,
+                password: password
+            }
+        })
+        .then(result => {
+            if (result.data.error == true) {
+                alert(result.data.message);
+            } else {
+              const token = JSON.stringify(result.data)
+              AsyncStorage.setItem('signInData', token)
+              this.props.navigation.navigate('Checkin');
+            }
+          }).catch(e => {
+                alert('Error Async: cannot sign in');
+          })
+
   }
-  login= async() =>{
-    const email = String(this.state.email).toLowerCase()
-    const password = String(this.state.password)
-    await this.props.handleLogin(email,password)
-    const users = this.props.loginLocal.login
-      if(users.token){
-        await AsyncStorage.multiSet([
-          ['token', users.token],
-          ['id', `${users.id}`]
-        ])
-        console.log(users.token)
-        console.log(users.id)
-        this.props.navigation.navigate('Loading')
-      }else{
-        alert('Invalid Email or Password')
-      }       
+
+  verifyInput = (email, password) =>   {
+    if (email == '' && password == '') {
+        return {
+            verified: false,
+        }
+    } else {
+        return {
+            verified: true
+        }
     }
+}
     
 
   render() {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, AsyncStorage, FlatList, Image, TouchableOpacity } from 'react-native';
 import { Left, Header, Right, Body } from 'native-base';
 import {FlatGrid} from 'react-native-super-grid'
 import {connect} from 'react-redux'
-import * as actionRoom from '../redux/actions/actionRoom'
+import * as actionRoom from './../redux/actions/actionRoom'
 
 
 class Room extends Component {
@@ -13,40 +13,47 @@ class Room extends Component {
         this.state = {
             interval: null
         }
-    }
-
+        AsyncStorage.getItem('signInData', (e, result) => {
+            if (!e) {
+              if (result !== null) {
+                result = JSON.parse(result);
+      
+                this.setState({
+                  signInData: result
+                });
+      
+                this.props.handleGetRoom({
+                  token: result.token
+                });
+              }
+            }
+          });
+        }
     
     render() {
-        const {room} = this.props.roomLocal
-        
         return (
             <View>
                 <View>
-                    <Header>
-                        <Left>
-                            
-                        </Left>
-                        <Body>
-                            <Text>ROOM</Text>
-                        </Body>
-                        <Right>
-
-                        </Right>
+                    <Header style={styles.header}>
+                        <Left></Left>
+                        <Body><Text style={styles.txtHeader}>CHECK-IN</Text></Body>
                     </Header>
-                </View>
-                <View>
-                    <FlatGrid 
-                    itemDimension={130}
-                    items={room}
-                    renderItem={({item, index})=>{
-                        <View>
-                            <Text>{item.name}</Text>
-                        </View>
-                    }}
                     
-                    />
                 </View>
-            </View>
+                <FlatGrid
+                itemDimension={130}
+                style={styles.grid}
+                items={this.props.roomLocal.room}
+                renderItem={({ item, index }) => (
+                    <TouchableOpacity>
+                        <View style={styles.viewGrid}>
+                            <Text style={styles.txtGrid}>{item.name}</Text>
+                        </View>
+                    </TouchableOpacity>  
+                )}
+          
+                />
+          </View>
         );
     }
 }
@@ -62,6 +69,26 @@ const mapDispatchToProps = dispatch => {
         handleGetRoom: (params) => dispatch(actionRoom.handleGetRoom(params))
     }
 }
+const styles = StyleSheet.create({
+    header:{
+        backgroundColor:'#fda22d'
+    },
+    txtHeader:{
+        fontSize:24,
+        paddingLeft:25,
+        fontWeight:'bold'
+    },
+    viewGrid:{
+        backgroundColor:'tomato',
+    },
+    txtGrid:{
+        marginVertical:30,
+        fontSize:24,
+        fontWeight:'bold',
+        textAlign:'center'
+    }
+  
+}); 
 
 // export default Room;
 export default connect(

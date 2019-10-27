@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Login from '../screen/Login';
 import Register from '../screen/Register';
+import Loading from '../screen/Loading';
 
 const GuestNav = createStackNavigator({
     Login : {
@@ -14,6 +15,12 @@ const GuestNav = createStackNavigator({
     Register : {
         screen: Register,
         navigationOptions:{
+            header: null
+        }
+    },
+    Loading : {
+        screen: Loading,
+        navigationOptions: {
             header: null
         }
     }

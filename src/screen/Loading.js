@@ -1,29 +1,34 @@
-import React, { Component } from 'react';
-import {View, Text} from 'react-native'
+import React, {Component} from 'react'
+import {View} from 'react-native'
+import {Text}from 'native-base'
 import * as actionRoom from '../redux/actions/actionRoom'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
-class Loading extends Component {
+
+
+class Loading extends Component{
     async componentDidMount(){
         setTimeout( async () => {
           console.log(this.props.loginLocal.login.token)
-          await this.props.handleGetRooms({
+          await this.props.handleGetRoom({
             token:this.props.loginLocal.login.token
           })
-          this.props.navigation.navigate('Room')
+          this.props.navigation.navigate('Checkin')
         }, 0);
     }
-    render() {
-        return (
+
+    render(){
+        return(
             <View>
-                <Text>LOADING.....</Text>
+                <Text>LOADING......</Text>
             </View>
-        );
+        )
     }
 }
-const mapStateToProps = state => {
+  
+  const mapStateToProps = state => {
     return {
-      loginLocal: state.login,
+      loginLocal: state.login
     }
   }
   
@@ -32,9 +37,8 @@ const mapStateToProps = state => {
       handleGetRoom: (params) => dispatch(actionRoom.handleGetRoom(params))      
     }
   }
-
-// export default Loading;
-export default connect(
+  
+  export default connect(
     mapStateToProps,
     mapDispatchToProps
   )(Loading);
