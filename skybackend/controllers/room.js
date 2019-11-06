@@ -39,3 +39,19 @@ exports.updateRoom = (req, res) => {
         }
     });
 }
+exports.deleteRoom = (req, res) => {
+    Room.destroy({where: {id: req.params.id}})
+    .then(result => {
+        res.send({
+            status: 'success',
+            id: req.params.id
+        });
+    })
+    .catch(e => {
+        res.send({
+            status: 'error',
+            message: "Failed Delete Room :(",
+            error: e
+        });
+    })
+}

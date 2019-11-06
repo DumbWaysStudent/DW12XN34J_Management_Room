@@ -6,6 +6,7 @@ const User = models.user
 exports.login = (req, res) =>{
     const email = req.body.email
     const password = req.body.password
+    const name = req.body.name
 
     User.findOne({where: {email, password}}).then(user=>{
 
@@ -15,6 +16,8 @@ exports.login = (req, res) =>{
                 id: user.id,
                 email,
                 token,
+                name: user.name,
+                avatar: user.avatar,
                 message:  'Login Sukses!!'
             })
         }else{

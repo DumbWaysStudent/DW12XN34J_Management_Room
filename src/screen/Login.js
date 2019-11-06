@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, AsyncStorage} from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, AsyncStorage, ScrollView} from 'react-native';
 import { Icon, Button } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 import * as actionLogin from './../redux/actions/actionLogin';
-import Axios from 'axios';
+// import Axios from 'axios';
 import {API} from '../host'
 
 
@@ -58,70 +58,34 @@ class Login extends Component {
         this.setState({submitDisabled: true})
     }
   }
-  // login= async() =>{
-  //   const email = String(this.state.email).toLowerCase()
-  //   const password = String(this.state.password)
-  //   await this.props.handleLogin(email,password)
-  //   const users = this.props.loginLocal.login
-  //     if(users.token){
-  //       await AsyncStorage.multiSet([
-  //         ['token', users.token],
-  //         ['id', `${users.id}`]
-  //       ])
-  //       console.log(users.token)
-  //       console.log(users.id)
-  //       this.props.navigation.navigate('Loading')
-  //     }else{
-  //       alert('Invalid Email or Password')
-  //     }       
-  //   }
-    login =()=>{
-      const {email, password} = this.state
-      
-        Axios({
-            method: 'post',
-            url: `${API}/login`,
-            data: {
-                email: email,
-                password: password
-            }
-        })
-        .then(result => {
-            if (result.data.error == true) {
-                alert(result.data.message);
-            } else {
-              const token = JSON.stringify(result.data)
-              AsyncStorage.setItem('signInData', token)
-              this.props.navigation.navigate('Checkin');
-            }
-          }).catch(e => {
-                alert('Error Async: cannot sign in');
-          })
-
-  }
-
-  verifyInput = (email, password) =>   {
-    if (email == '' && password == '') {
-        return {
-            verified: false,
-        }
-    } else {
-        return {
-            verified: true
-        }
+  login= async() =>{
+    const email = String(this.state.email).toLowerCase()
+    const password = String(this.state.password)
+    await this.props.handleLogin(email,password)
+    const users = this.props.loginLocal.login
+      if(users.token){
+        // await AsyncStorage.setItem('data', JSON.stringify(users))
+        await AsyncStorage.multiSet([
+          ['token', users.token],
+          ['id', `${users.id}`],
+          ['name', users.name]
+        ])
+        this.props.navigation.navigate('Setting')
+      }else{
+        alert('Invalid Email or Password')
+      }       
     }
-}
-    
 
+    
   render() {
-    console.disableYellowBox = true
+
     return (
       
         <View style={styles.container}>
-          <LinearGradient colors={['#fc4a1a','#f7b733']} style={styles.gradient} >
-          
+          <LinearGradient colors={['#f18c8e','#305f72']} style={styles.gradient} >
+            <ScrollView>
             <View style={styles.title}>
-              <Image source={require('../img/sky.png')} style={styles.logo} />
+              <Image source={require('../img/skyroom.png')} style={styles.logo} />
               {/* <Text style={{fontSize:30}}>LOGIN</Text> */}
             </View>
           
@@ -161,10 +125,10 @@ class Login extends Component {
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.buttonReg} onPress={() => this.props.navigation.navigate('Register')} >
-                <Text style={styles.buttonText}>Register</Text>
+                <Text style={styles.buttonText2}>Register</Text>
               </TouchableOpacity>
             </View>
-  
+            </ScrollView>
           </LinearGradient>
         </View>
       
@@ -179,7 +143,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    handleLogin: (email,password) => dispatch(actionLogin.handleLogin(email,password))
+    handleLogin: (email, password) => dispatch(actionLogin.handleLogin(email, password))
   }
 }
 
@@ -191,9 +155,9 @@ const styles = StyleSheet.create({
     flex:1
   },
   logo:{
-    width:150,
+    width:260,
     height:200,
-    marginTop:20
+    marginTop:20,
   },
   title:{
     flex:1,
@@ -216,6 +180,7 @@ const styles = StyleSheet.create({
   labelEmail:{
     fontSize:20,
     marginRight:250,
+    fontFamily:'SonderSans-Black'
   },
   inputPass:{
     flex:8,
@@ -223,8 +188,10 @@ const styles = StyleSheet.create({
     paddingHorizontal:16,
   },
   labelPass:{
-    fontSize:20,
+    fontSize:19,
     marginRight:200,
+    marginTop:10,
+    fontFamily:'SonderSans-Black'
   },
   inputBox: {  
     width:300,
@@ -252,25 +219,33 @@ const styles = StyleSheet.create({
   },
   buttonSign: { 
     width:300,
-    backgroundColor:'#fc4a1a',
+    backgroundColor:'#142d4c',
     marginTop: 40,
     paddingVertical: 13,
     borderRadius:15
     },
   buttonReg:{
     width:300,
-    backgroundColor:'#fd1d1d',
+    backgroundColor:'#df7599',
     marginBottom: 10,
     marginTop:20,
     paddingVertical: 13,
     borderRadius:15
   },
+  buttonText2: {
+    fontSize:16,
+    fontWeight:'500',
+    color:'#000',
+    textAlign:'center',
+    fontFamily:'SonderSans-Black'
+    },
   buttonText: {
     fontSize:16,
     fontWeight:'500',
-    color:'#ffffff',
-    textAlign:'center'
-    }
+    color:'#fff',
+    textAlign:'center',
+    fontFamily:'SonderSans-Black'
+   }
 })
 
 // export default Login;

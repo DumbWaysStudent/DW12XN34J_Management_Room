@@ -1,17 +1,17 @@
 import { createAppContainer, createSwitchNavigator} from 'react-navigation';
 import GuestNav from './GuestNav';
 import BottomTabNavigator from './BottomTabNavigator';
-import Loading from '../screen/Loading';
+import Splash from '../screen/Splash';
 
 
 const SwitchNav = createSwitchNavigator({
+    Splash: Splash,
     GuestNav: GuestNav,
-    BottomTabNavigator: BottomTabNavigator,
-    Loading: Loading
+    BottomTabNavigator: BottomTabNavigator,    
 },
-{
-    initialRouteName: 'GuestNav'
-}
+// {
+//     initialRouteName: 'GuestNav'
+// }
 )
 
 export default createAppContainer(SwitchNav);

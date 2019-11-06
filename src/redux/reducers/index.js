@@ -6,6 +6,8 @@ import reducerLogin from './../reducers/reducerLogin'
 import reducerRegister from './../reducers/reducerRegister'
 import reducerRooms from './../reducers/reducerRooms'
 import reducerCheckin from './../reducers/reducerCheckin'
+import reducerCustomer from './../reducers/reducerCustomer'
+import reducerUser from './../reducers/reducerUser'
 
 
 const reduceRouter = createNavigationReducer(SwitchNav)
@@ -14,8 +16,10 @@ const appReducer = combineReducers({
     router: reduceRouter,
     login: reducerLogin,
     register: reducerRegister,
-    room: reducerRooms,
-    checkin: reducerCheckin
+    user: reducerUser,
+    rooms: reducerRooms,
+    checkin: reducerCheckin,
+    customer: reducerCustomer
 })
 
 export default appReducer

@@ -3,7 +3,6 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Login from '../screen/Login';
 import Register from '../screen/Register';
-import Loading from '../screen/Loading';
 
 const GuestNav = createStackNavigator({
     Login : {
@@ -18,12 +17,6 @@ const GuestNav = createStackNavigator({
             header: null
         }
     },
-    Loading : {
-        screen: Loading,
-        navigationOptions: {
-            header: null
-        }
-    }
 },
 {
     initialRouteName: 'Login'

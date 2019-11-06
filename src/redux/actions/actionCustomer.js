@@ -1,13 +1,48 @@
 import * as types from '../types'
 import axios from 'axios'
+import {API} from '../../host'
 
-export const handleGetCustomer = () => ({
+export const handleGetCustomer = (token) => ({
     type: types.GET_CUSTOMER,
     payload: axios({
         method: 'GET',
-        url: 'http://192.168.0.51:7000/api/v2/customers',
-        // headers:{
-        //     Authorization: `${params.token}`
-        // }
+        url: `${API}/customers`,
+        headers: {
+            Authorization: `${token}`
+        }
+    })
+})
+
+export const handleAddCustomer = (name, identity_number, phone_number, image, token) => ({
+    type: types.ADD_CUSTOMER,
+    payload: axios({
+        method: 'post',
+        url: `${API}/customer`,
+        data: {
+            name,
+            identity_number,
+            phone_number,
+            image
+        },
+        headers: {
+            Authorization: `${token}`
+        }
+    })
+});
+
+export const handleUpdateCustomer = (id, name, identity_number, phone_number, image, token) => ({
+    type: types.UPDATE_CUSTOMER,
+    payload: axios({
+        method: 'put',
+        url: `${API}/customer/${id}`,
+        data:{
+            name,
+            identity_number,
+            phone_number,
+            image
+        },
+        headers: {
+            Authorization: `${token}`
+        }
     })
 })

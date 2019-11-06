@@ -4,7 +4,9 @@ const initialState = {
     isLoading: false,
     isError: false,
     isSuccess: false,
-    customer: []
+    customer: [],
+    addCustomer: [],
+    editCustomer:[]
 }
 
 export default function reducerCustomer(state = initialState, action){
@@ -27,5 +29,47 @@ export default function reducerCustomer(state = initialState, action){
             isLoading:false,
             isError:true
         }
+        //ADD CUSTOMER
+        case `${types.ADD_CUSTOMER}_PENDING`:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case `${types.ADD_CUSTOMER}_FULFILLED`:
+            return {
+                ...state,
+                isLoading: false,
+                isSuccess: true,
+                addCustomer: action.payload.data
+            }
+        case `${types.ADD_CUSTOMER}_REJECTED`:
+            return {
+                ...state,
+                isLoading: false,
+                isError: true
+            }
+
+        // UPDATE CUSTOMER
+        case `${types.UPDATE_CUSTOMER}_PENDING`:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case `${types.UPDATE_CUSTOMER}_FULFILLED`:
+            return {
+                ...state,
+                isLoading: false,
+                isSuccess: true,
+                editCustomer: action.payload.data
+            }
+        case `${types.UPDATE_CUSTOMER}_REJECTED`:
+            return {
+                ...state,
+                isLoading: false,
+                isError: true
+            }
+        
+        default:
+        return state;
     }
 }

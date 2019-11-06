@@ -1,18 +1,15 @@
 import * as types from '../types'
 import axios from 'axios'
+import {API} from '../../host'
 
-export const handleLogin = (email,password) => ({
+export const handleLogin = (email, password) => ({
     type: types.LOGIN,
     payload: axios({
         method: 'POST',
-        url: 'http://192.168.0.51:7000/api/v2/login',
+        url: `${API}/login`,
         data:{
-            email,
-            password
+            email: email,
+            password: password
         }
     }),
-    // payload: axios.post('https://skytoon-api.herokuapp.com/api/v1/login',{
-    //     email,
-    //     password
-    // })
 })

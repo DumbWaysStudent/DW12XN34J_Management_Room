@@ -13,16 +13,16 @@ const BottomTabNavigator = createMaterialBottomTabNavigator({
     Checkin: {
         screen: Checkin,
         navigationOptions: {
-            tabBarLabel: 'For You',
+            tabBarLabel: 'CheckIn',
             tabBarIcon : ({tintColor}) => (
-                <Icon name='home' size={20} color={(tintColor)} />
+                <Icon name='check-circle' size={20} color={(tintColor)} />
             )
         }
     },
     Room: {
         screen: Room,
         navigationOptions: {
-            tabBarLabel: 'Favorit',
+            tabBarLabel: 'Room',
             tabBarIcon: ({tintColor}) => (
                 <Icon name='bed' size={20} color={(tintColor)} />
             )
@@ -31,18 +31,18 @@ const BottomTabNavigator = createMaterialBottomTabNavigator({
     Customer:{
         screen: Customer,
         navigationOptions: {
-            tabBarLabel: 'Profile',
+            tabBarLabel: 'Customer',
             tabBarIcon: ({tintColor}) => (
-                <Icon name="contact" size={20} color={(tintColor)} />
+                <Icon name="address-card" size={20} color={(tintColor)} />
             )
         }
     },
     Setting:{
         screen: Setting,
         navigationOptions: {
-            tabBarLabel: 'Profile',
+            tabBarLabel: 'Settings',
             tabBarIcon: ({tintColor}) => (
-                <Icon name="setting" size={20} color={(tintColor)} />
+                <Icon name="cogs" size={20} color={(tintColor)} />
             )
         }
     },
@@ -55,7 +55,7 @@ const BottomTabNavigator = createMaterialBottomTabNavigator({
         // inactiveTintColor:'red',
         // style:{backgroundColor:'red'}
     },
-    barStyle:{backgroundColor:'#fc4a1a'}
+    barStyle:{backgroundColor:'#305f72'}
     // activeTintColor: '#fff',  
     // inactiveTintColor: '#000',  
     // barStyle: { backgroundColor: '#4287f5' },  

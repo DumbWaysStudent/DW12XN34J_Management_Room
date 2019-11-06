@@ -13,3 +13,6 @@ export const UPDATE_CHECKIN = 'UPDATE_CHECKIN'
 export const ADD_ROOM = 'ADD_ROOM'
 export const ADD_CUSTOMER = 'ADD_CUSTOMER'
 export const ADD_CHECKIN = 'ADD_CHECKIN'
+
+export const CHECKOUT = 'CHECKOUT'
+export const UPDATE_USER = 'UPDATE_USER'

@@ -1,7 +1,9 @@
 import * as types from '../types'
 
 const initialState = {
-    isLogin: false,
+    isLoading: false,
+    isError: false,
+    isSuccess: false,
     login: []
 };
 
@@ -9,16 +11,21 @@ export default function reducerLogin(state = initialState, action){
     switch (action.type){
         case `${types.LOGIN}_PENDING`:
         return {
-            ...state
+            ...state,
+            isLoading: true
         }
         case `${types.LOGIN}_FULFILLED`:
         return {
             ...state,
+            isLoading: false,
+            isSuccess: true,
             login: action.payload.data
         }
         case `${types.LOGIN}_REJECTED`:
         return {
-            ...state
+            ...state,
+            isLoading: false,
+            isError: true
         }
         default:
         return state;

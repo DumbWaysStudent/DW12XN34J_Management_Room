@@ -46,3 +46,19 @@ exports.updateCustomer = (req, res) => {
         }
     });
 }
+exports.deleteCustomer = (req, res) => {
+    Customer.destroy({where: {id: req.params.id}})
+    .then(result => {
+        res.send({
+            status: 'success',
+            id: req.params.id
+        });
+    })
+    .catch(e => {
+        res.send({
+            status: 'error',
+            message: "Failed Delete :(",
+            error: e
+        });
+    })
+}

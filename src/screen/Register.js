@@ -85,10 +85,11 @@ class Register extends Component {
     return (
       
         <View style={styles.container}>
-          <LinearGradient colors={['#fc4a1a','#f7b733']} style={styles.gradient} >
+          <LinearGradient colors={['#f18c8e','#305f72']} style={styles.gradient} >
           
             <View style={styles.title}>
-              <Image source={require('../img/sky.png')} style={styles.logo} />
+              {/* <Image source={require('../img/sky.png')} style={styles.logo} /> */}
+              <Text style={{fontSize:30}}>LOGIN</Text>
             </View>
           
             <View style={styles.form}>
